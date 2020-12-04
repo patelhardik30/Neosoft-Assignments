@@ -1,72 +1,17 @@
  <!DOCTYPE html>
 <html>
-  <link rel="stylesheet"type="text/css" href="{{ asset('css/adminlte.min.css') }}">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<style>
-input[type=text], select {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-input[type=password], select {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Form Validation in Laravel</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+</head>
 
-
-input[type=submit] {
-  width: 100%;
-  background-color: #4CAF50;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-input[type=submit]:hover {
-  background-color: #45a049;
-}
-
-div {
-  border-radius: 5px;
-  background-color: #f2f2f2;
-  padding: 20px;
-  align-items: center;
-  width: 60%;
-  height: 40%;
-}
-.center{
-  border-radius: 5px;
-  background-color: #f2f2f2;
-  padding: 20px;
-  align-items: center;
-  width: 60%;
-  height: 10%;
-  margin-left: auto;
-  margin-right: auto;
-
-}
-.error {
-    color: red;
-    font-weight: 400;
-    display: block;
-    padding: 6px 0;
-    font-size: 14px;
-}
-</style>
 <body>
+  <div class="container mt-5">
   @if (session('success'))
                 <div class="alert alert-success alert-block">
                     <button type="button" class="close" data-dismiss="alert">×</button> 
@@ -79,84 +24,123 @@ div {
                     {{ session('failure') }}
                 </div>
             @endif
-  <hr>
-  <h2>Edit User</h2><span><a style=" float: right; margin: 10px;" href="{{route('view-user')}}" class="btn btn-primary" role="button"> Back</a></span>
+
+  <h2>Edit User</h2>
   <hr>
   <form method="post" action="{{route('add-user')}}" enctype="multipart/form-data">
     @csrf
-    <label for="fname">First Name</label>
-    <input type="text" id="fname" name="firstname"  value="{{$banner->first_name}}">
-    @if ($errors->has('firstname'))
-                <div class="error">
-                    {{ $errors->first('firstname') }}
-                </div>
-                @endif
+                <div class="form-group">
+                  <label>First Name</label>
+                  <input type="text" id="fname" name="firstname" value="{{$banner->first_name}}">
+                  @if ($errors->has('firstname'))
+                              <div class="error">
+                                  {{ $errors->first('firstname') }}
+                              </div>
+                              @endif
+                            </div>
 
-    <label for="lname">Last Name</label>
-    <input type="text" id="lname" name="lastname" value="{{$banner->last_name}}">
-       @if ($errors->has('lastname'))
-                <div class="error">
-                    {{ $errors->first('lastname') }}
-                </div>
-                @endif
+                <div class="form-group">
+                  <label>Last Name</label>
+                  <input type="text" id="lname" name="lastname" value="{{$banner->last_name}}">
+                     @if ($errors->has('lastname'))
+                              <div class="error">
+                                  {{ $errors->first('lastname') }}
+                              </div>
+                              @endif
+                            </div>
 
+                <div class="form-group">
+                  <label>Email</label>
+                  <input type="text" id="email" name="email" value="{{$banner->email}}">
+                     @if ($errors->has('email'))
+                              <div class="error">
+                                  {{ $errors->first('email') }}
+                              </div>
+                              @endif
+                            </div>
 
-    <label for="email">Email</label>
-    <input type="text" id="email" name="email"  value="{{$banner->email}}">
-       @if ($errors->has('email'))
-                <div class="error">
-                    {{ $errors->first('email') }}
-                </div>
-                @endif
+                <div class="form-group">
+                  <label>Contact Number</label>
+                  <input type="text" id="number" name="number" value="{{$banner->contact_no}}">
+                     @if ($errors->has('number'))
+                              <div class="error">
+                                  {{ $errors->first('number') }}
+                              </div>
+                              @endif
+                            </div>
 
-    <label for="number">Contact Number</label>
-    <input type="text" id="number" name="number"  value="{{$banner->contact_no}}">
-       @if ($errors->has('number'))
-                <div class="error">
-                    {{ $errors->first('number') }}
-                </div>
-                @endif
+                <div class="form-group">
+                  <label>City</label>
+                  <input type="text" id="city" name="city" value="{{$banner->city}}">
+                     @if ($errors->has('city'))
+                              <div class="error">
+                                  {{ $errors->first('city') }}
+                              </div>
+                              @endif
+                            </div>
 
-    <label for="city">City</label>
-    <input type="text" id="city" name="city"  value="{{$banner->city}}">
-       @if ($errors->has('city'))
-                <div class="error">
-                    {{ $errors->first('city') }}
-                </div>
-                @endif
+                <div class="form-group">            
+                  <label>Gender</label><br>
+                  <input id="add_fields_placeholder" style="display: inline-flex;" type="radio" name="gender" value="male"> Male
+                <input id="add_fields_placeholder" style="display: inline-flex;" type="radio" name="gender" value="female"> Female
+                   @if ($errors->has('gender'))
+                              <div class="error">
+                                  {{ $errors->first('gender') }}
+                              </div>
+                              @endif
+                            </div>
 
-    <label for="gender">Gender</label><br>
-    <input style="display: inline-flex;" type="radio" name="gender" value="male"> Male
-  <input style="display: inline-flex;" type="radio" name="gender" value="female"> Female
-  <br><br>
-     @if ($errors->has('gender'))
-                <div class="error">
-                    {{ $errors->first('gender') }}
-                </div>
-                @endif
-   
-   <label >Profile Photo:</label><br><br>
-   <input type="file" name="image"  value="{{$banner->photo}}"><br><br>
-      @if ($errors->has('image'))
-                <div class="error">
-                    {{ $errors->first('image') }}
-                </div>
-                @endif
+                            <div class="form-group">           
+                              <div id="add_fields_placeholderValue">
+                                  Age:
+                                  <input type="text" name="add_fields_placeholderValue" id="add_fields_placeholderValue">
+                               </div>
+                              </div>
 
-  <label for="status">Status:</label><br>
-    <input style="display: inline-flex;" type="radio" name="status" value="1"> Active
-    <input style="display: inline-flex;" type="radio" name="status" value="0"> Inactive
-       @if ($errors->has('status'))
-                <div class="error">
-                    {{ $errors->first('status') }}
-                </div>
-                @endif
+                <div class="form-group">   
+                  <label >Profile Photo:</label>
+                  <input type="file" name="image" value="{{$banner->photo}}">
+                     @if ($errors->has('image'))
+                               <div class="error">
+                                   {{ $errors->first('image') }}
+                               </div>
+                               @endif
+                             </div>
 
-  
-    <input type="submit" value="Submit">
+                <div class="form-group">
+                  <label>Status:</label>
+                    <input style="display: inline-flex;" type="radio" name="status" value="1"> Active
+                    <input style="display: inline-flex;" type="radio" name="status" value="0"> Inactive
+                       @if ($errors->has('status'))
+                                <div class="error">
+                                    {{ $errors->first('status') }}
+                                </div>
+                                @endif
+                  </div>
+
+                  <span><a style="margin-bottom:10px;" href="{{route('view-user')}}" class="btn btn-warning" role="button"> Back to View Users</a></span>
+    <input type="submit" value="Submit Updated Informarion" class="btn btn-dark btn-block">
 
   </form>
-
+</div>
 
 </body>
 </html>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function()
+                  {
+                  $("#add_fields_placeholder").change(function()
+        {
+            if($(this).val() == "male")
+        {
+            $("#add_fields_placeholderValue").show();
+        }
+        else
+        {
+            $("#add_fields_placeholderValue").hide();
+        }
+            });
+                      $("#add_fields_placeholderValue").hide();
+});
+</script>
