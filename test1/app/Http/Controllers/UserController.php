@@ -29,7 +29,6 @@ class UserController extends Controller
 			'status'=> 'required|in:1,0',
     		'image'=>'required|max:10000',
     		'status'=>'required',
-    		'password'=>'required',
     	]);
     	 $files = $request->file('image');
 		 $user = new User;  
@@ -43,7 +42,6 @@ class UserController extends Controller
     	$name=$files->getClientOriginalName(); 
     	$files->move('img',$name); 
     	 $user->photo=$name; 
-    	 $user->password=Hash::make($request->password);
     	 $user->save();
     	 return redirect()->route('view-user')->with('success','User created Successfully!');
     }
