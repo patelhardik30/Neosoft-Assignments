@@ -28,6 +28,7 @@ label {
     font-size: 14px;
 }
 
+
 .form-control.error {
     border-color: red;
     padding: .375rem .75rem;
